@@ -1,0 +1,66 @@
+{
+  "owner": 0,
+  "comments": "",
+  "labelType": "EU",
+  "foodTags": [],
+  "source": "",
+  "barcodes": [],
+  "nutrients": [
+    {
+      "id": 208,
+      "amount": 63
+    },
+    {
+      "id": 204,
+      "amount": 3.5
+    },
+    {
+      "id": 606,
+      "amount": 2.3
+    },
+    {
+      "id": 205,
+      "amount": 4.5
+    },
+    {
+      "id": 269,
+      "amount": 4.5
+    },
+    {
+      "id": 203,
+      "amount": 3.4
+    },
+    {
+      "id": 307,
+      "amount": 40
+    }
+  ],
+  "measures": [
+    {
+      "amount": 1,
+      "name": "oz",
+      "id": 52542632,
+      "type": "Weight",
+      "value": 28.3495231
+    },
+    {
+      "amount": 1,
+      "name": "g",
+      "id": 52542633,
+      "type": "Weight",
+      "value": 1
+    }
+  ],
+  "defaultMeasureId": 52542633,
+  "translations": [
+    {
+      "translationId": 20829061,
+      "name": "TINE Helmelk 3,5 % fett 1 liter",
+      "languageCode": "en"
+    }
+  ],
+  "name": "TINE Helmelk 3,5 % fett 1 liter",
+  "id": 8675309,
+  "category": 0,
+  "properties": {}
+}

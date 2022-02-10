@@ -1,0 +1,97 @@
+{
+  "owner": 0,
+  "comments": "Allergens: Milk",
+  "labelType": "EU",
+  "foodTags": [
+    "Brand",
+    "Dairy"
+  ],
+  "source": "CronoPy",
+  "barcodes": [
+    "07038010000065",
+    "07038011000064",
+    "07038012000063"
+  ],
+  "nutrients": [
+    {
+      "id": 208,
+      "amount": 63
+    },
+    {
+      "id": 204,
+      "amount": 3.5
+    },
+    {
+      "id": 606,
+      "amount": 2.3
+    },
+    {
+      "id": 205,
+      "amount": 4.5
+    },
+    {
+      "id": 269,
+      "amount": 4.5
+    },
+    {
+      "id": 203,
+      "amount": 3.4
+    },
+    {
+      "id": 307,
+      "amount": 40
+    }
+  ],
+  "measures": [
+    {
+      "amount": 1,
+      "name": "oz",
+      "id": 52542632,
+      "type": "Weight",
+      "value": 28.3495231
+    },
+    {
+      "amount": 1,
+      "name": "g",
+      "id": 52542633,
+      "type": "Weight",
+      "value": 1
+    },
+    {
+      "amount": 1,
+      "name": "Glass, small",
+      "id": 1,
+      "type": "Weight",
+      "value": 100
+    },
+    {
+      "amount": 1,
+      "name": "Glass, large",
+      "id": 2,
+      "type": "Weight",
+      "value": 300
+    }
+  ],
+  "defaultMeasureId": 2,
+  "translations": [
+    {
+      "translationId": 20829061,
+      "name": "TINE Helmelk 3,5 % fett 1 liter",
+      "languageCode": "en"
+    },
+    {
+      "translationId": 20829066,
+      "name": "Całe Mleko 3,5 % Ttłuszcze 1 litr",
+      "languageCode": "pl"
+    },
+    {
+      "translationId": 20829062,
+      "name": "TINE Lait Entier 3,5 % Gras 1 litre",
+      "languageCode": "fr"
+    }
+  ],
+  "name": "TINE Helmelk 3,5 % fett 1 liter",
+  "id": 8675309,
+  "category": 7,
+  "properties": {}
+}
