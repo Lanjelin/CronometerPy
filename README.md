@@ -1,7 +1,7 @@
 # CronometerPy
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Python Library for generating json for importing to Cronometer foods.
+Python Library for generating json for importing to [Cronometer](https://cronometer.com/) foods.
 
 Import the makeJson()-function from [crono_json.py](https://github.com/Lanjelin/CronometerPy/blob/main/crono_json.py), and give it at least a name for the food, and a list of dictionaries containing the nutriends. It will return a dictionary you can use directly with json.dump.
 
