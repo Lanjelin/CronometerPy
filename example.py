@@ -14,7 +14,7 @@ nutrients = [
     {"id": 307, "amount": 40.0},
 ]
 names = {
-    "pl": "Całe Mleko 3,5 % Ttłuszcze 1 litr",
+    "pl": "TINE Całe Mleko 3,5 % Ttłuszcze 1 litr",
     "fr": "TINE Lait Entier 3,5 % Gras 1 litre",
 }  # Is anyone even using these?
 category = 7  # Dairy and Egg Products
