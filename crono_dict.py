@@ -154,13 +154,3 @@ languages = {
     "it": 20829065,
     "pl": 20829066,
 }
-
-matinfo = {
-    "Protein": [203, "g"],
-    "Fett": [204, "g"],
-    "Karbohydrat": [205, "g"],
-    "Energi": [208, "kcal"],
-    "Sukkerarter": [269, "g"],
-    "Sodium": [307, "mg"],  #  gram salt * 400 = sodium mg
-    "Mettede fettsyrer": [606, "g"],
-}
