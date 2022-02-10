@@ -1,4 +1,6 @@
 # CronometerPy
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 Python Library for generating json for importing to Cronometer foods.
 They claim it's not possible, yet it's working like a charm.
 
