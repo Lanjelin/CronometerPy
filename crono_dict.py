@@ -94,6 +94,8 @@ nutrients = {
     "Chromium": [10003, "?g"],
     "Biotin": [10004, "?g"],
     "Iodine": [10005, "mg"],
+    "Sugar Alcohol": [10007, "g"],
+    "Allulose": [10010, "g"],
 }
 
 category = {
