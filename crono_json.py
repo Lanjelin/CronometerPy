@@ -2,7 +2,7 @@
 from crono_dict import languages
 
 
-def makeJson(
+def makeJsonDict(
     name,
     nutrients,
     names={},

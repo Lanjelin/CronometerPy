@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import json
-from crono_json import makeJson
+from crono_json import makeJsonDict
 
 name = "TINE Helmelk 3,5 % fett 1 liter"
 nutrients = [
@@ -33,7 +33,7 @@ source = (
     "CronoPy"  # This is only visible before saving, afterwards it's changed to Custom
 )
 
-js = makeJson(
+js = makeJsonDict(
     name,
     nutrients,
     names=names,

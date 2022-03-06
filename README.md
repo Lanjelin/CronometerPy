@@ -3,11 +3,11 @@
 
 Python Library for generating json for importing to [Cronometer](https://cronometer.com/) foods.
 
-Import the makeJson()-function from [crono_json.py](https://github.com/Lanjelin/CronometerPy/blob/main/crono_json.py), and give it at least a name for the food, and a list of dictionaries containing the nutriends. It will return a dictionary you can use directly with json.dump.
+Import the makeJsonDict()-function from [crono_json.py](https://github.com/Lanjelin/CronometerPy/blob/main/crono_json.py), and give it at least a name for the food, and a list of dictionaries containing the nutriends. It will return a dictionary you can use directly with json.dump.
 
 ```py
 import json
-from crono_json import makeJson
+from crono_json import makeJsonDict
 
 name = "TINE Helmelk 3,5 % fett 1 liter"
 nutrients = [
@@ -21,7 +21,7 @@ nutrients = [
 ]
 
 with open(f"fancy_name.json", "w") as outfile:
-    json.dump(makeJson(name, nutrients), outfile)
+    json.dump(makeJsonDict(name, nutrients), outfile)
 ```
 
 For a complete example with all the variables, take a look at [example.py](https://github.com/Lanjelin/CronometerPy/blob/main/example.py), it's output is available in [example.json](https://github.com/Lanjelin/CronometerPy/blob/main/example.json)
