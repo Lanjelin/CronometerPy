@@ -8,6 +8,7 @@ Import the makeJsonDict()-function from [crono_json.py](https://github.com/Lanje
 ```py
 import json
 from crono_json import makeJsonDict
+from cronopy import CronoPy
 
 name = "TINE Helmelk 3,5 % fett 1 liter"
 nutrients = [
@@ -19,9 +20,25 @@ nutrients = [
     {"id": 203, "amount": 3.4},
     {"id": 307, "amount": 40.0},
 ]
-
+crono_json_dict = makeJsonDict(name, nutrients)
+# Save as json
 with open(f"fancy_name.json", "w") as outfile:
-    json.dump(makeJsonDict(name, nutrients), outfile)
+    json.dump(crono_json_dict, outfile)
+
+# Directly save to cronometer custom foods
+cron = CronoPy()
+msg, error = cron.Login(username, password)
+if error:
+    raise SystemExit(msg)
+else:
+    print(msg)
+msg, error = cron.importCustomFood(crono_json_dict)
+if error:
+   print(f"Error: {msg}")
+else:
+   print(msg)
+msg, error = cron.Logout()
+print(msg)
 ```
 
 For a complete example with all the variables, take a look at [example.py](https://github.com/Lanjelin/CronometerPy/blob/main/example.py), it's output is available in [example.json](https://github.com/Lanjelin/CronometerPy/blob/main/example.json)
