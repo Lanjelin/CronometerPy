@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from crono_dict import languages
+from .crono_dict import languages
 
 
 def makeJsonDict(
