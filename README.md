@@ -21,11 +21,20 @@ nutrients = [
     {"id": 307, "amount": 40.0},
 ]
 crono_json_dict = makeJsonDict(name, nutrients)
+
 # Save as json
 with open(f"fancy_name.json", "w") as outfile:
     json.dump(crono_json_dict, outfile)
 
 # Directly save to cronometer custom foods
+# so far it requires, and only supports 
+# name, nutrients, barcodes(only first), notes and source
+barcodes = ["07038010000065"]
+notes = "Allergens: Milk"
+source = "CronoPy"
+crono_json_dict = makeJsonDict(
+    name, nutrients, notes=notes, barcodes=barcodes, source=source
+)
 cron = CronoPy()
 msg, error = cron.Login(username, password)
 if error:
