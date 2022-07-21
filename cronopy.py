@@ -18,10 +18,13 @@ class CronoPy:
 
         self.APIContentType = "application/x-www-form-urlencoded; charset=UTF-8"
 
+        # self.AppName = "com.cronometer.client.CronometerService"
+        self.AppName = "com.cronometer.shared.rpc.CronometerService"
         self.GWTContentType = "text/x-gwt-rpc; charset=UTF-8"
         self.GWTModuleBase = "https://cronometer.com/cronometer/"
         self.GWTPermutation = "7B121DC5483BF272B1BC1916DA9FA963"
-        self.GWTHeader = "3B6C5196158464C5643BA376AF05E7F1"
+        # self.GWTHeader = "3B6C5196158464C5643BA376AF05E7F1"
+        self.GWTHeader = "2D6A926E3729946302DC68073CB0D550"
 
         self.HTMLLoginURL = "https://cronometer.com/login/"
         self.APILoginURL = "https://cronometer.com/login"
@@ -38,19 +41,19 @@ class CronoPy:
         self.userid = ""
 
     def GWTGenerateAuthToken(self):
-        result = f"7|0|8|https://cronometer.com/cronometer/|{self.GWTHeader}|com.cronometer.client.CronometerService|generateAuthorizationToken|java.lang.String/2004016611|I|com.cronometer.client.data.AuthScope/3337242207|{self.nonce}|1|2|3|4|4|5|6|6|7|8|{self.userid}|3600|7|2|"
+        result = f"7|0|8|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|generateAuthorizationToken|java.lang.String/2004016611|I|com.cronometer.client.data.AuthScope/3337242207|{self.nonce}|1|2|3|4|4|5|6|6|7|8|{self.userid}|3600|7|2|"
         return result
 
     def GWTAuthenticate(self):
-        result = f"7|0|5|https://cronometer.com/cronometer/|{self.GWTHeader}|com.cronometer.client.CronometerService|authenticate|java.lang.Integer/3438268394|1|2|3|4|1|5|5|-300|"
+        result = f"7|0|5|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|authenticate|java.lang.Integer/3438268394|1|2|3|4|1|5|5|-300|"
         return result
 
     def GWTLogout(self):
-        result = f"7|0|6|https://cronometer.com/cronometer/|{self.GWTHeader}|com.cronometer.client.CronometerService|logout|java.lang.String/2004016611|{self.nonce}|1|2|3|4|1|5|6|"
+        result = f"7|0|6|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|logout|java.lang.String/2004016611|{self.nonce}|1|2|3|4|1|5|6|"
         return result
 
     def doIneedThis(self, token, content):  # Dont think I do
-        result = f"7|0|7|https://cronometer.com/cronometer/|{self.GWTHeader}|com.cronometer.client.CronometerService|getFoodFromJSON|java.lang.String/2004016611|{token}|{content}|1|2|3|4|2|5|5|6|7|"
+        result = f"7|0|7|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|getFoodFromJSON|java.lang.String/2004016611|{token}|{content}|1|2|3|4|2|5|5|6|7|"
         return result
 
     def MakeImportPayload(self, data):
@@ -58,7 +61,7 @@ class CronoPy:
         # Missing: names={}, category=0, tags=[], barcodes=[], measures=[], defaultmeasure=52542633,
         # Ignored: label="EU"
         # Not needed: owner=0, id=8675309,
-        def_start = f"7|0|27|https://cronometer.com/cronometer/|{self.GWTHeader}|com.cronometer.client.CronometerService|addFood|java.lang.String/2004016611|com.cronometer.client.data.Food/173541194|com.cronometer.client.foodeditor.IngredientSubstitutions/53890574|{self.nonce}|java.util.ArrayList/4159755760|{data['barcodes'][0]}|{data['comments']}|com.cronometer.client.data.NutritionLabelType/1252743626|com.cronometer.client.data.Measure/2801078263|oz|com.cronometer.client.data.Measure$Type/1842092880|g|java.util.HashMap/1797211028|java.lang.Integer/3438268394|java.lang.Double/858496421|{data['source']}|java.util.HashSet/3273092938|com.cronometer.client.data.Translation/2027684045|com.cronometer.client.data.Language/4060169223|en|English|https://cdn1.cronometer.com/media/flags/us.png|{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|2|A|9|2|13|1|0|0|14|15|0|28.3495231|13|1|0|0|16|-7|1|17|"
+        def_start = f"7|0|27|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|java.lang.String/2004016611|com.cronometer.client.data.Food/173541194|com.cronometer.client.foodeditor.IngredientSubstitutions/53890574|{self.nonce}|java.util.ArrayList/4159755760|{data['barcodes'][0]}|{data['comments']}|com.cronometer.client.data.NutritionLabelType/1252743626|com.cronometer.client.data.Measure/2801078263|oz|com.cronometer.client.data.Measure$Type/1842092880|g|java.util.HashMap/1797211028|java.lang.Integer/3438268394|java.lang.Double/858496421|{data['source']}|java.util.HashSet/3273092938|com.cronometer.client.data.Translation/2027684045|com.cronometer.client.data.Language/4060169223|en|English|https://cdn1.cronometer.com/media/flags/us.png|{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|2|A|9|2|13|1|0|0|14|15|0|28.3495231|13|1|0|0|16|-7|1|17|"
         if len(data["nutrients"]) > 0:
             nutri_string = "".join(
                 f'|18|{item["id"]}|19|{item["amount"]}' for item in data["nutrients"]
@@ -136,22 +139,20 @@ class CronoPy:
         r, error = self.MakeAPIRequest("post", self.APILoginURL, data=login_payload)
         if error:
             return r, True
-
         # GWT Login
         r, error = self.MakeGWTRequest(
             "post", self.GWTBaseURL, data=self.GWTAuthenticate()
         )
         if error:
             return r, True
-
         # Generating GWT Auth token
-        self.userid = re.findall(self.GWTUserIDRegex, r.text)[0]
+        """ self.userid = re.findall(self.GWTUserIDRegex, r.text)[0]
         r, error = self.MakeGWTRequest(
             "post", self.GWTBaseURL, data=self.GWTGenerateAuthToken()
         )
         if error:
             return r, True
-        self.GWTAuthToken = re.findall(self.GWTAuthTokenRegex, r.text)[0]
+        self.GWTAuthToken = re.findall(self.GWTAuthTokenRegex, r.text)[0] """
         return "Logged in.", False
 
     def importCustomFood(self, data):
