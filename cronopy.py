@@ -57,11 +57,11 @@ class CronoPy:
         return result
 
     def MakeImportPayload(self, data):
-        # Working: name, nutrients, single barcode, notes aka comments, source
+        # Working: name, nutrients, single barcode, notes aka comments, source, label
         # Missing: names={}, category=0, tags=[], barcodes=[], measures=[], defaultmeasure=52542633,
-        # Ignored: label="EU"
         # Not needed: owner=0, id=8675309,
-        label = 2 # American:0 American2016:1 European:2 Austalia/NZ:3 Canadian:4
+        labels = ["AMERICAN", "AMERICAN_2016", "EU", "AUSTRALIA_NZ", "CANADIAN"]
+        label = labels.index([data["labelType"]])
         def_start = (
             f"7|0|26|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
             f"java.lang.String/2004016611|com.cronometer.shared.foods.models.Food/3392319142|"
@@ -77,14 +77,12 @@ class CronoPy:
             f"{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|"
             f"{label}|A|9|1|13|1|0|0|14|15|2|100|16|"
         )
-        num_nutri = str(len(data["nutrients"])) #12
+        num_nutri = str(len(data["nutrients"]))  # 12
         if len(data["nutrients"]) > 0:
             nutri_string = "".join(
                 f'|17|{item["id"]}|18|{item["amount"]}' for item in data["nutrients"]
             )
-        def_end = (
-            f"|16|0|0|0|19|20|0|9|1|21|22|23|24|25|24|26|0|{self.userid}|0|"
-        )
+        def_end = f"|16|0|0|0|19|20|0|9|1|21|22|23|24|25|24|26|0|{self.userid}|0|"
         result = f"{def_start}{num_nutri}{nutri_string}{def_end}"
         return result
 
