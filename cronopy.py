@@ -61,14 +61,29 @@ class CronoPy:
         # Missing: names={}, category=0, tags=[], barcodes=[], measures=[], defaultmeasure=52542633,
         # Ignored: label="EU"
         # Not needed: owner=0, id=8675309,
-        def_start = f"7|0|27|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|java.lang.String/2004016611|com.cronometer.client.data.Food/173541194|com.cronometer.client.foodeditor.IngredientSubstitutions/53890574|{self.nonce}|java.util.ArrayList/4159755760|{data['barcodes'][0]}|{data['comments']}|com.cronometer.client.data.NutritionLabelType/1252743626|com.cronometer.client.data.Measure/2801078263|oz|com.cronometer.client.data.Measure$Type/1842092880|g|java.util.HashMap/1797211028|java.lang.Integer/3438268394|java.lang.Double/858496421|{data['source']}|java.util.HashSet/3273092938|com.cronometer.client.data.Translation/2027684045|com.cronometer.client.data.Language/4060169223|en|English|https://cdn1.cronometer.com/media/flags/us.png|{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|2|A|9|2|13|1|0|0|14|15|0|28.3495231|13|1|0|0|16|-7|1|17|"
+        label = 2 # American:0 American2016:1 European:2 Austalia/NZ:3 Canadian:4
+        def_start = (
+            f"7|0|26|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
+            f"java.lang.String/2004016611|com.cronometer.shared.foods.models.Food/3392319142|"
+            f"com.cronometer.shared.foods.models.IngredientSubstitutions/1892525086|{self.nonce}|"
+            f"java.util.ArrayList/4159755760|{data['barcodes'][0]}|{data['comments']}|"
+            f"com.cronometer.shared.foods.NutritionLabelType/1598919019|"
+            f"com.cronometer.shared.foods.models.Measure/1232538395|Serving|"
+            f"com.cronometer.shared.foods.models.Measure$Type/2365167904|"
+            f"java.util.HashMap/1797211028|java.lang.Integer/3438268394|"
+            f"java.lang.Double/858496421|{data['source']}|"
+            f"java.util.HashSet/3273092938|com.cronometer.shared.foods.models.Translation/4034452093|"
+            f"com.cronometer.shared.user.models.Language/1257207975|en|English|https://cdn1.cronometer.com/media/flags/us.png|"
+            f"{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|"
+            f"{label}|A|9|1|13|1|0|0|14|15|2|100|16|"
+        )
+        num_nutri = str(len(data["nutrients"])) #12
         if len(data["nutrients"]) > 0:
             nutri_string = "".join(
-                f'|18|{item["id"]}|19|{item["amount"]}' for item in data["nutrients"]
+                f'|17|{item["id"]}|18|{item["amount"]}' for item in data["nutrients"]
             )
-        num_nutri = str(len(data["nutrients"]))
         def_end = (
-            f"|17|0|0|0|20|21|0|9|1|22|23|24|25|26|25|27|20829061|{self.userid}|0|"
+            f"|16|0|0|0|19|20|0|9|1|21|22|23|24|25|24|26|0|{self.userid}|0|"
         )
         result = f"{def_start}{num_nutri}{nutri_string}{def_end}"
         return result
@@ -146,8 +161,8 @@ class CronoPy:
         if error:
             return r, True
         # Generating GWT Auth token
-        """ self.userid = re.findall(self.GWTUserIDRegex, r.text)[0]
-        r, error = self.MakeGWTRequest(
+        self.userid = re.findall(self.GWTUserIDRegex, r.text)[0]
+        """ r, error = self.MakeGWTRequest(
             "post", self.GWTBaseURL, data=self.GWTGenerateAuthToken()
         )
         if error:
