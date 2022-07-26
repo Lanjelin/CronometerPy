@@ -61,7 +61,7 @@ class CronoPy:
         # Missing: names={}, category=0, tags=[], barcodes=[], measures=[], defaultmeasure=52542633,
         # Not needed: owner=0, id=8675309,
         labels = ["AMERICAN", "AMERICAN_2016", "EU", "AUSTRALIA_NZ", "CANADIAN"]
-        label = labels.index([data["labelType"]])
+        label = labels.index(data["labelType"])
         def_start = (
             f"7|0|26|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
             f"java.lang.String/2004016611|com.cronometer.shared.foods.models.Food/3392319142|"
