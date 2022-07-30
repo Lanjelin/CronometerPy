@@ -62,28 +62,35 @@ class CronoPy:
         # Not needed: owner=0, id=8675309,
         labels = ["AMERICAN", "AMERICAN_2016", "EU", "AUSTRALIA_NZ", "CANADIAN"]
         label = labels.index(data["labelType"])
+        measure_name = "per"
+        measure_size = "100"
+        num_nutri = str(len(data["nutrients"]))  # 12
         def_start = (
-            f"7|0|26|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
+            f"7|0|28|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
             f"java.lang.String/2004016611|com.cronometer.shared.foods.models.Food/3392319142|"
             f"com.cronometer.shared.foods.models.IngredientSubstitutions/1892525086|{self.nonce}|"
             f"java.util.ArrayList/4159755760|{data['barcodes'][0]}|{data['comments']}|"
             f"com.cronometer.shared.foods.NutritionLabelType/1598919019|"
-            f"com.cronometer.shared.foods.models.Measure/1232538395|Serving|"
-            f"com.cronometer.shared.foods.models.Measure$Type/2365167904|"
+            f"com.cronometer.shared.foods.models.Measure/1232538395|{measure_name}|"  # default measure
+            f"com.cronometer.shared.foods.models.Measure$Type/2365167904|g|oz|"  # array of measures
             f"java.util.HashMap/1797211028|java.lang.Integer/3438268394|"
-            f"java.lang.Double/858496421|{data['source']}|"
-            f"java.util.HashSet/3273092938|com.cronometer.shared.foods.models.Translation/4034452093|"
+            f"java.lang.Double/858496421|{data['source']}|java.util.HashSet/3273092938|"
+            f"com.cronometer.shared.foods.models.Translation/4034452093|"
             f"com.cronometer.shared.user.models.Language/1257207975|en|English|https://cdn1.cronometer.com/media/flags/us.png|"
             f"{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|"
-            f"{label}|A|9|1|13|1|0|0|14|15|2|100|16|"
+            f"{label}|A|9|3|"  # |3| no. measures
+            f"13|1|0|0|14|15|0|{measure_size}|"  # default measure
+            f"13|1|0|0|16|-7|1|"  # 1g measure
+            f"13|1|0|0|17|-7|28.3495231|"  # 1oz measure
+            # 13|1|0|0|18|-7|75|
+            f"18|{num_nutri}"
         )
-        num_nutri = str(len(data["nutrients"]))  # 12
         if len(data["nutrients"]) > 0:
             nutri_string = "".join(
-                f'|17|{item["id"]}|18|{item["amount"]}' for item in data["nutrients"]
+                f'|19|{item["id"]}|20|{item["amount"]}' for item in data["nutrients"]
             )
-        def_end = f"|16|0|0|0|19|20|0|9|1|21|22|23|24|25|24|26|0|{self.userid}|0|"
-        result = f"{def_start}{num_nutri}{nutri_string}{def_end}"
+        def_end = f"|18|0|0|0|21|22|0|9|1|23|24|25|26|27|26|28|0|{self.userid}|0|"
+        result = f"{def_start}{nutri_string}{def_end}"
         return result
 
     def setContextHeaders(self):
