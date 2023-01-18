@@ -4,8 +4,6 @@
 
 Python Library for generating json for importing to [Cronometer](https://cronometer.com/) foods.
 
-# Currently not working, a fix is under way
-
 Import the makeJsonDict()-function from [crono_json.py](https://github.com/Lanjelin/CronometerPy/blob/main/crono_json.py), and give it at least a name for the food, and a list of dictionaries containing the nutriends. It will return a dictionary you can use directly with json.dump.
 
 ```py

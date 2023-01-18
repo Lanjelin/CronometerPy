@@ -64,32 +64,41 @@ class CronoPy:
         label = labels.index(data["labelType"])
         measure_name = "per"
         measure_size = "100"
-        num_nutri = str(len(data["nutrients"]))  # 12
+        num_nutri = str(len(data["nutrients"]))
         def_start = (
-            f"7|0|28|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
-            f"java.lang.String/2004016611|com.cronometer.shared.foods.models.Food/3392319142|"
+            f"7|0|30|https://cronometer.com/cronometer/|{self.GWTHeader}|{self.AppName}|addFood|"
+            f"java.lang.String/2004016611|"
+            f"com.cronometer.shared.foods.models.Food/25002741|"
             f"com.cronometer.shared.foods.models.IngredientSubstitutions/1892525086|{self.nonce}|"
             f"java.util.ArrayList/4159755760|{data['barcodes'][0]}|{data['comments']}|"
             f"com.cronometer.shared.foods.NutritionLabelType/1598919019|"
             f"com.cronometer.shared.foods.models.Measure/1232538395|{measure_name}|"  # default measure
-            f"com.cronometer.shared.foods.models.Measure$Type/2365167904|g|oz|"  # array of measures
-            f"java.util.HashMap/1797211028|java.lang.Integer/3438268394|"
-            f"java.lang.Double/858496421|{data['source']}|java.util.HashSet/3273092938|"
+            f"com.cronometer.shared.foods.models.Measure$Type/2365167904|oz|"  # array of measures | removed 1g, still works thp
+            f"com.cronometer.shared.foods.models.NutrientMap/168231382|"
+            f"com.cronometer.shared.foods.models.NutrientMap$NutrientFilter/1990310964|"
+            f"java.util.HashMap/1797211028|"
+            f"java.lang.Integer/3438268394|"
+            f"com.cronometer.shared.foods.models.Nutrient/331784102|"
+            f"com.cronometer.shared.foods.models.Nutrient$Type/4225112523|{data['source']}|"
+            f"java.util.HashSet/3273092938|"
             f"com.cronometer.shared.foods.models.Translation/4034452093|"
             f"com.cronometer.shared.user.models.Language/1257207975|en|English|https://cdn1.cronometer.com/media/flags/us.png|"
             f"{data['name']}|1|2|3|4|3|5|6|7|8|6|0|9|1|5|10|0|11|0|0|0|12|"
-            f"{label}|A|9|3|"  # |3| no. measures
+            f"{label}|A|9|2|"  # |2| no. measures
             f"13|1|0|0|14|15|0|{measure_size}|"  # default measure
-            f"13|1|0|0|16|-7|1|"  # 1g measure
-            f"13|1|0|0|17|-7|28.3495231|"  # 1oz measure
-            # 13|1|0|0|18|-7|75|
-            f"18|{num_nutri}"
+            f"13|1|0|0|16|-7|28.3495231|"  # 1oz measure
+            f"17|18|0|" # what does this do?
+            f"19|{num_nutri}"
         )
         if len(data["nutrients"]) > 0:
-            nutri_string = "".join(
-                f'|19|{item["id"]}|20|{item["amount"]}' for item in data["nutrients"]
-            )
-        def_end = f"|18|0|0|0|21|22|0|9|1|23|24|25|26|27|26|28|0|{self.userid}|0|"
+            nutri_string = ""
+            for item in data["nutrients"]:
+                if item["id"] == 208: # hopefully not more are needed
+                    nutri_string += f'|20|{item["id"]}|21|{item["amount"]}|{item["id"]}|22|0' # what does
+                else:
+                    nutri_string += f'|20|{item["id"]}|21|{item["amount"]}|{item["id"]}|-14'  # it even mean?
+
+        def_end = f"|19|0|0|0|23|24|0|9|1|25|26|27|28|29|28|30|0|{self.userid}|0|"
         result = f"{def_start}{nutri_string}{def_end}"
         return result
 
@@ -180,6 +189,7 @@ class CronoPy:
         r, error = self.MakeGWTRequest(
             "post", self.GWTBaseURL, data=self.MakeImportPayload(data)
         )
+        print(r)
         if error:
             return r, True
         return f"Sucessfully imported \"{data['name']}\"", False

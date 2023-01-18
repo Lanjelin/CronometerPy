@@ -4,6 +4,7 @@ __pycache__/
 *__pycache__/
 *.py[cod]
 test*.py
+test*.json
 
 # C extensions
 *.so
